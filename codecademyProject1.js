@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import * as serviceWorker from './serviceWorker';
+
 
 class Contact extends React.Component{
   constructor(props){
@@ -43,4 +43,3 @@ class Contact extends React.Component{
 
 ReactDOM.render(<Contact />,
   document.getElementById('root'))
-serviceWorker.unregister();

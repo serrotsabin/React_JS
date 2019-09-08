@@ -1,39 +1,59 @@
 import React from 'react';
-import './App.css';
+import {Link, Route,Switch } from 'react-router-dom';
 
-import About from './components/About';
-import Shop from './components/Shop';
-import Nav  from './components/nav';
+const Course = ({match})=>{
+  return(
+    <div>{match.params.course}</div>
+  )
+}
+const Courses = ({match})=>{
+  return(
+    <div>
+      <h1>Courses</h1>
+      <ul>
+          <Link to={`${match.url}/1`}><li>Course 1</li></Link>
+          <Link to={`${match.url}/2`}><li>Course 2</li></Link>
+          <Link to={`${match.url}/3`}><li>Course 3</li></Link>
+        </ul>
+        
+        <Route path = {`${match.path}/:course`} component={Course}/>
+        
+    </div>
+  )
+}
 
-import {BrowserRouter as Router , Route,} from 'react-router-dom';
+const Home = ()=>{
+  return(
+    <div>
+      <h1>Home</h1>
+    </div>
+  )
+}
+
+const About = ()=>{
+  return(
+    <div>
+      <h1>About</h1>
+    </div>
+  )
+}
 
 class App extends React.Component{
   render(){
     return(
       <div>
-        <Router>
-        <Nav />
-        <Route path = "/" exact component = {Home}/>
-        <Route path = "/about" component = {About}/>
-        <Route path = '/shop' component = {Shop}/>
-        </Router>
+        <ul>
+          <Link to='/'><li>Home</li></Link>
+          <Link to='/courses'><li>Courses</li></Link>
+          <Link to='/about'><li>About</li></Link>
+        </ul>
+        <Switch>
+        <Route exact path = '/' component = {Home} />
+        <Route path = '/courses' component = {Courses} />
+        <Route path = '/about' component = {About} />
+        </Switch>
       </div>
     )
   }
 }
-class Home extends React.Component{
-  componentWillMount(){
-    alert('Mounting Home')
-  }
-  componentWillUnmount(){
-    alert("Home Unmounted")
-  }
-  render(){
-    return(
-      <div>
-        <h1>Home Page</h1>
-      </div>
-    )
-  }
-}
-export default App;
+export default App
